@@ -769,14 +769,58 @@ html: true
     .conf-arxiv:hover,   .pub:hover > .conf-arxiv   { background-color: #c45569 !important; }
 
     /* ---------- Social media ---------- */
-    .about-sm img {
-        display: block;
-        width: 100%;
-        max-width: 800px;
-        height: auto;
-        margin: 0 auto 16px !important;
-        border-radius: 12px;
+    .sm-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+        margin: 18px 0 18px;
     }
+    .sm-card {
+        --dot: #bbb;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 16px 18px;
+        background: #fff;
+        border: 1px solid #ebe7e1;
+        border-radius: 12px;
+        transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s ease, border-color .5s ease;
+    }
+    .sm-card:hover {
+        transform: translateY(-3px);
+        border-color: transparent;
+        box-shadow: 0 14px 30px rgba(60,50,40,.12);
+    }
+    .sm-wechat  { --dot: #9cb9a2; --hl: #07c160; }
+    .sm-rednote { --dot: #d6a3a6; --hl: #ff2442; }
+    .sm-qr {
+        flex: 0 0 auto;
+        width: 120px;
+        height: 120px;
+        margin: 0 !important;
+        border-radius: 8px;
+    }
+    .sm-text { min-width: 0; text-align: left; }
+    .sm-meta {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12.5px;
+        color: #999;
+        letter-spacing: .02em;
+    }
+    .sm-meta::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--dot);
+        transition: background .4s ease, transform .4s ease;
+    }
+    .sm-card:hover .sm-meta::before { background: var(--hl); transform: scale(1.3); }
+    .sm-name { margin-top: 2px; font-weight: bold; color: #333; line-height: 1.5; }
+    .sm-desc { margin-top: 4px; font-size: 14px; line-height: 1.7; color: #777; }
+    .sm-note { text-align: left; color: #555; }
 
     /* ---------- Live numbers ---------- */
     .pv-counter {
@@ -833,6 +877,8 @@ html: true
     }
     /* phones: compact rows, thumbnail left */
     @container (max-width: 540px) {
+        .sm-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+        .sm-qr { width: 104px; height: 104px; }
         .feat-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
         .post-body a.feat-card {
             display: grid;
@@ -984,8 +1030,10 @@ html: true
 </details>
 
 # Social Media
-<div class="about-sm">
-<img data-src="/img/all.png" alt="social">
+
+<div class="sm-grid">
+<div class="sm-card sm-wechat"><img class="sm-qr" src="/img/social/wechat_qr.png" alt="WeChat QR code: thinkwee的随笔"><div class="sm-text"><div class="sm-meta">WeChat 微信公众号</div><div class="sm-name">thinkwee的随笔</div><div class="sm-desc">Scan the code, or search “thinkwee的随笔” in WeChat.</div></div></div>
+<div class="sm-card sm-rednote"><img class="sm-qr" src="/img/social/rednote_qr.png" alt="Rednote QR code: thinkwee"><div class="sm-text"><div class="sm-meta">Rednote 小红书</div><div class="sm-name">thinkwee</div><div class="sm-desc">小红书号: thinkwee. Scan the code to follow.</div></div></div>
 </div>
 
-- I sometimes sync some articles from this blog on Wechat and Rednote, and I share other interesting things on these platforms. You can find me via above links.
+<div class="sm-note">I sometimes sync some articles from this blog on Wechat and Rednote, and I share other interesting things on these platforms.</div>
